@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ratio — Two-Agent AI Investment Analysis</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ── HERO ──────────────────────────────────────────────────── -->
+<header>
+  <div class="logo-row">
+    <svg class="logo-icon" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="4"  y="28" width="8"  height="16" rx="2" fill="#58a6ff" opacity=".4"/>
+      <rect x="16" y="18" width="8"  height="26" rx="2" fill="#58a6ff" opacity=".7"/>
+      <rect x="28" y="10" width="8"  height="34" rx="2" fill="#58a6ff"/>
+      <rect x="40" y="22" width="8"  height="22" rx="2" fill="#3fb950" opacity=".8"/>
+    </svg>
+    <h1>Ra<span>t</span>io</h1>
+  </div>
+  <p class="subtitle">Two-Agent AI Investment Analysis &nbsp;·&nbsp; Powered by IBM Granite</p>
+  <div class="badge-row">
+    <span class="badge badge-blue">IBM watsonx Orchestrate</span>
+    <span class="badge badge-green">Ledger — Data Agent</span>
+    <span class="badge badge-red">Verdict — Analysis Agent</span>
+  </div>
+</header>
+
+<!-- ── MAIN ───────────────────────────────────────────────────── -->
+<main>
+
+  <!-- ① Financial data input -->
+  <section class="input-section">
+    <label for="fin-data">Financial Data Input</label>
+    <textarea
+      id="fin-data"
+      placeholder="Paste company financial data here — income statements, balance sheets, cash flow, ratios, or any raw figures you want the agents to analyse…"
+    ></textarea>
+    <div class="input-actions">
+      <button class="btn-primary" id="copy-btn">Copy &amp; Send to Agents</button>
+      <button class="btn-ghost"   id="clear-btn">Clear</button>
+    </div>
+    <p class="hint">Tip: copy your data, then open a chat panel below and paste it into the agent's message box.</p>
+  </section>
+
+  <!-- ② How it works -->
+  <section class="how-section" aria-label="How it works">
+    <h2>How it works</h2>
+    <div class="pipeline" role="list">
+
+      <!-- Step 1 -->
+      <div class="step" role="listitem">
+        <div class="step-icon step-icon-blue" aria-hidden="true">
+          <!-- Document icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+        </div>
+        <div class="step-content">
+          <p class="step-title">Data Input</p>
+          <p class="step-desc">Paste raw financial statements, ratios, or figures into the input field above.</p>
+        </div>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step" role="listitem">
+        <div class="step-icon step-icon-green" aria-hidden="true">
+          <!-- Check-circle icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+            <polyline points="22 4 12 14.01 9 11.01"/>
+          </svg>
+        </div>
+        <div class="step-content">
+          <p class="step-title">Ledger</p>
+          <p class="step-desc">Validates, cleans, and structures the data — flagging anomalies or missing values.</p>
+        </div>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step" role="listitem">
+        <div class="step-icon step-icon-red" aria-hidden="true">
+          <!-- Trending-up icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+            <polyline points="17 6 23 6 23 12"/>
+          </svg>
+        </div>
+        <div class="step-content">
+          <p class="step-title">Verdict</p>
+          <p class="step-desc">Analyses the validated data and produces an investment recommendation with reasoning.</p>
+        </div>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step" role="listitem">
+        <div class="step-icon step-icon-purple" aria-hidden="true">
+          <!-- Star / output icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+          </svg>
+        </div>
+        <div class="step-content">
+          <p class="step-title">Final Output</p>
+          <p class="step-desc">A structured verdict — buy / hold / sell signal backed by IBM Granite reasoning.</p>
+        </div>
+      </div>
+
+    </div><!-- /.pipeline -->
+  </section>
+
+  <!-- ③ Agent panels -->
+  <div class="divider">AI Agents</div>
+  <div class="panels">
+
+    <!-- LEDGER ─────────────────────────── -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-dot panel-dot-green"></span>
+        <span class="panel-title">Ledger</span>
+        <span class="panel-role">Data &amp; Validation</span>
+        <span class="panel-status loading" id="ledger-status">
+          <span class="spinner"></span> Connecting…
+        </span>
+      </div>
+      <div class="panel-body">
+        <!-- Loading overlay -->
+        <div class="loading-overlay" id="ledger-overlay" aria-live="polite">
+          <div class="loader-ring"></div>
+          <p class="loader-text">Connecting to Ledger…</p>
+          <p class="loader-sub">Initialising IBM watsonx Orchestrate</p>
+        </div>
+        <!-- Embed target -->
+        <div class="agent-root" id="ledger-root"></div>
+      </div>
+    </div>
+
+    <!-- VERDICT ────────────────────────── -->
+    <div class="panel">
+      <div class="panel-header">
+        <span class="panel-dot panel-dot-red"></span>
+        <span class="panel-title">Verdict</span>
+        <span class="panel-role">Analysis &amp; Recommendation</span>
+        <span class="panel-status loading" id="verdict-status">
+          <span class="spinner"></span> Connecting…
+        </span>
+      </div>
+      <div class="panel-body">
+        <!-- Loading overlay -->
+        <div class="loading-overlay" id="verdict-overlay" aria-live="polite">
+          <div class="loader-ring"></div>
+          <p class="loader-text">Connecting to Verdict…</p>
+          <p class="loader-sub">Initialising IBM watsonx Orchestrate</p>
+        </div>
+        <!-- Embed target -->
+        <div class="agent-root" id="verdict-root"></div>
+      </div>
+    </div>
+
+  </div><!-- /.panels -->
+</main>
+
+<!-- ── FOOTER ─────────────────────────────────────────────────── -->
+<footer>
+  Ratio &mdash; Two-Agent Investment Analysis &nbsp;|&nbsp;
+  Built with <a href="https://www.ibm.com/products/watsonx-orchestrate" target="_blank" rel="noopener">IBM watsonx Orchestrate</a>
+  &amp; IBM Granite
+</footer>
+
+<!-- ── UTILITY SCRIPT ─────────────────────────────────────────── -->
+<script src="script.js"></script>
+
+<!-- ── LEDGER AGENT EMBED ─────────────────────────────────────── -->
+<script>
+  (function () {
+    var HOST = "https://au-syd.watson-orchestrate.cloud.ibm.com";
+    window.wxOConfiguration = {
+      orchestrationID: "ef3b961b46e942a0b58cf67070dc85be_7c51d849-d9a0-40c5-b1dd-5190718c6336",
+      hostURL: HOST,
+      rootElementID: "ledger-root",
+      deploymentPlatform: "ibmcloud",
+      crn: "crn:v1:bluemix:public:watsonx-orchestrate:au-syd:a/ef3b961b46e942a0b58cf67070dc85be:7c51d849-d9a0-40c5-b1dd-5190718c6336::",
+      chatOptions: { agentId: "6c9a3653-2e2f-44b7-96d1-c6d1c91f3be9" }
+    };
+    setTimeout(function () {
+      var s = document.createElement('script');
+      s.src = HOST + '/wxochat/wxoLoader.js?embed=true';
+      s.addEventListener('load', function () { wxoLoader.init(); });
+      document.head.appendChild(s);
+    }, 0);
+  }());
+</script>
+
+<!-- ── VERDICT AGENT EMBED ────────────────────────────────────── -->
+<script>
+  (function () {
+    var HOST = "https://au-syd.watson-orchestrate.cloud.ibm.com";
+    window.wxOConfiguration = {
+      orchestrationID: "ef3b961b46e942a0b58cf67070dc85be_7c51d849-d9a0-40c5-b1dd-5190718c6336",
+      hostURL: HOST,
+      rootElementID: "verdict-root",
+      deploymentPlatform: "ibmcloud",
+      crn: "crn:v1:bluemix:public:watsonx-orchestrate:au-syd:a/ef3b961b46e942a0b58cf67070dc85be:7c51d849-d9a0-40c5-b1dd-5190718c6336::",
+      chatOptions: { agentId: "ceb32e52-fe77-4347-bc37-3bdc22295316" }
+    };
+    setTimeout(function () {
+      var s = document.createElement('script');
+      s.src = HOST + '/wxochat/wxoLoader.js?embed=true';
+      s.addEventListener('load', function () { wxoLoader.init(); });
+      document.head.appendChild(s);
+    }, 0);
+  }());
+</script>
+
+</body>
+</html>
